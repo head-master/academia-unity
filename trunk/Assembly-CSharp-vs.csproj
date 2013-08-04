@@ -44,7 +44,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\DetectFaceOfCube.cs" />
+     <Compile Include="Assets\LevelBuilder.cs" />
      <Compile Include="Assets\TerrainCube.cs" />
      <Compile Include="Assets\TouchScript\Examples\Basic\Scripts\Breaker.cs" />
      <Compile Include="Assets\TouchScript\Examples\Basic\Scripts\Spawner.cs" />
@@ -59,7 +59,9 @@
      <Compile Include="Assets\TouchScript\Examples\Hit Test\Scripts\HitTestScene.cs" />
      <Compile Include="Assets\TouchScript\Examples\Simple Gestures\Scripts\FullscreenZoom.cs" />
      <Compile Include="Assets\TouchScript\Examples\Simple Gestures\Scripts\Tapper.cs" />
+     <Compile Include="Assets\scripts\LevelBuilder_Map.cs" />
      <Compile Include="Assets\scripts\PanCamera.cs" />
+     <Compile Include="Assets\scripts\PrefabCube.cs" />
      <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Basic.shader" />
      <None Include="Assets\Nobiax Free Textures 17\Nobiax Free Textures 17.txt" />
      <None Include="Assets\Standard Assets\Skyboxes\_skybox info.txt" />

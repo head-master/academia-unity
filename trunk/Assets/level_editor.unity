@@ -218,6 +218,7 @@ GameObject:
   - 114: {fileID: 2039420835}
   - 114: {fileID: 2039420836}
   - 45: {fileID: 2039420837}
+  - 114: {fileID: 2039420838}
   m_Layer: 2
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -296,15 +297,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc95dc549bd689b4186f370c98529e40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MAX_WIDTH: 5
-  MAX_DEPTH: 5
-  MAX_HEIGHT: 5
-  prefabs:
-  - {fileID: 100000, guid: a6c557e08db1aee40bfa0dc90d5e1d9c, type: 2}
-  - {fileID: 100000, guid: 68f027d6edae8924dbc4fc80fe0f7625, type: 2}
-  - {fileID: 100000, guid: 0d3475536859e7648a42f3222b7d7b33, type: 2}
-  open_file_path: 
-  TargetLocation: {x: 0, y: 0, z: 0}
+  SelectedCube:
+    CubeCode: 0
+    Prefab: {fileID: 100000, guid: a6c557e08db1aee40bfa0dc90d5e1d9c, type: 2}
+  Cubes:
+  - CubeCode: 0
+    Prefab: {fileID: 100000, guid: a6c557e08db1aee40bfa0dc90d5e1d9c, type: 2}
+  - CubeCode: 1
+    Prefab: {fileID: 100000, guid: 68f027d6edae8924dbc4fc80fe0f7625, type: 2}
+  - CubeCode: 2
+    Prefab: {fileID: 100000, guid: 0d3475536859e7648a42f3222b7d7b33, type: 2}
 --- !u!114 &2039420836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,3 +332,19 @@ Skybox:
   m_GameObject: {fileID: 2039420829}
   m_Enabled: 1
   m_CustomSkybox: {fileID: 2100000, guid: da976b1a4f7ebb949b0f71341e4f1821, type: 2}
+--- !u!114 &2039420838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2039420829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 885b1972ad11a921d000d37b8d76c639, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  distance: 3
+  height: 3
+  heightDamping: 2
+  rotationDamping: 3

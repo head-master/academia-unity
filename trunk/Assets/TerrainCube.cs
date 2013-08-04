@@ -3,10 +3,8 @@ using System.Collections;
 
 public class TerrainCube
 {
-	//public GameObject prefab;
-	
-	public string PrefabString;
 	public int CubeCode;
+	
 	public int X
 	{
 		get;
@@ -39,7 +37,6 @@ public class TerrainCube
 	
 	public TerrainCube()
 	{
-		PrefabString = "None";
 		X = 0;
 		Y = 0;
 		Z = 0;

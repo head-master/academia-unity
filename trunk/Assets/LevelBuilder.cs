@@ -49,19 +49,12 @@ public class LevelBuilder : MonoBehaviour
 	const int LEFT2 = 9;
 	const int RIGHT1 = 10;
 	const int RIGHT2 = 11;
+
+    private GameObject previousComponent = null;
 	
-    /* TODO Camera shit, move to level-editor camera class at some point */
-	private Plane plane = new Plane(Vector3.up, Vector3.zero);
-    private Vector3 v3Center = new Vector3(0.5f,0.5f,0.0f);
-    private Component previousComponent = null;
-	
-	/* We need to keep track of each cube and their locations
-	 * to do that, we'll create a 3-D array of Cubes
-	 * which will correspond to Cubes in the real world */
 	private LevelBuilder_Map map = new LevelBuilder_Map(5, 5, 5);
 	
 	public PrefabCube SelectedCube;
-	
 	public List<PrefabCube> Cubes;
 	
 	string open_file_path = "";
@@ -72,16 +65,15 @@ public class LevelBuilder : MonoBehaviour
 		SelectedCube = Cubes[0];
 		CreateInitialFloor();
 	}
-	float speed = 10f;
-	// Update is called once per frame
+
 	void Update () 
 	{
 		if (Input.GetMouseButtonDown(0))
 		{
 			if (Input.GetKey(KeyCode.S))
-				OnMouseDown ();
+				HandleAddCube();
 			else
-				Movement();
+				HandleMoveToBlock();
 		}
 		
 		if (Input.GetKeyDown(KeyCode.Q))
@@ -94,47 +86,39 @@ public class LevelBuilder : MonoBehaviour
 			SelectedCube = Cubes[2];
 	}
 	
-	private void Movement()
+	private void HandleMoveToBlock()
 	{
 		RaycastHit hit;
 		
 		if (Physics.Raycast(camera.ScreenPointToRay (Input.mousePosition), out hit))
 		{
 			GameObject hitCube = hit.collider.gameObject;
-			Camera.main.GetComponent<SmoothFollow>().target = hitCube.transform;
-			/*Vector3 cubeLocation = hitCube.transform.localPosition;
-			
-			Debug.Log (cubeLocation);
-			
-			DoMovement(cubeLocation + new Vector3(0f, 0, 0f));
-			*/
-			Component render = hitCube.gameObject.GetComponentsInChildren<MeshRenderer>()[1];
-			
+			//Camera.main.GetComponent<SmoothFollow>().target = hitCube.transform;
+			Camera.main.GetComponent<SmoothFollow>().SetTarget(hitCube.transform, hitCube.transform.position.y);
+			hitCube.GetComponent<TerrainCubeController>().ActivatePanelOverlay();
+			hitCube.GetComponent<TerrainCubeController>().SetPanelOverlayColor(Color.blue);
 			if (previousComponent != null)
 			{
-				((MeshRenderer)previousComponent).enabled = false;
+				/* need to disable the previously selected panel */
+				previousComponent.GetComponent<TerrainCubeController>().DeactivatePanelOverlay();
 			}
 			
-			previousComponent = render;
-			((MeshRenderer)render).enabled = true;
-			
+			/* Regardless if we deactivated the previously selected 
+			 * cube, we need to set the previous cube to the currently
+			 * selected cube */
+			previousComponent = hitCube;
 			
 		}
 	}
 	
-	private void OnMouseDown()
+	private void HandleAddCube()
 	{
 		RaycastHit hit;
 		
 		if (Physics.Raycast(camera.ScreenPointToRay (Input.mousePosition), out hit))
 		{
-			//print("Hit Triangle Index: " + hit.triangleIndex);
 			GameObject hitCube = hit.collider.gameObject;
-			//Debug.Log (hitCube.gameObject.name);
-			
-			
 			Vector3 cubeLocation = hitCube.transform.localPosition;
-			Debug.Log (cubeLocation);
 			HandleFaceClick(cubeLocation.x, cubeLocation.y * 2.5f, cubeLocation.z, hit.triangleIndex);
 		}
 	}
@@ -193,11 +177,6 @@ public class LevelBuilder : MonoBehaviour
 	
 	private void AddCubeTop(float x, float y, float z)
 	{
-		/* Trying to add a cube on top of <x, y, z> */
-		/* Can guarantee that x and z are within bounds.
-		 * We should check to see our height is within
-		 * bounds */
-		Debug.Log ("Add Cube Top");
 		if (y + 1 > map.height)
 		{
 			Debug.Log("Cube placed to high");

@@ -10,7 +10,7 @@
 *.dbproj merge=union
 
 #Unity Version Control
-*.meta merge=union
+*.meta diff=astextplain
 
 # Standard to msysgit
 *.doc	 diff=astextplain

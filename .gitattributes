@@ -9,6 +9,9 @@
 *.fsproj merge=union
 *.dbproj merge=union
 
+#Unity Version Control
+*.meta merge=union
+
 # Standard to msysgit
 *.doc	 diff=astextplain
 *.DOC	 diff=astextplain
